@@ -9,8 +9,10 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AVKit
+import AVFoundation
 
-class EventsListViewController: UIViewController {
+class EventsListViewController: BaseViewController {
     
     @IBOutlet private weak var searchField: UITextField!
     @IBOutlet private weak var tableView: UITableView! {
@@ -62,14 +64,18 @@ class EventsListViewController: UIViewController {
         tableView.reloadData()
     }
     private func scanEvent(_ event: Event) {
-        print("Scan event: \(event.name ?? "")")
+        displayScanFunctionPermission() {
+            //granted
+            self.moveToScan()
+        }
     }
-}
-
-
-// MARK: - UI Setup
-extension EventsListViewController {
-    
+    private func moveToScan() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            let vc = ScanViewController(nibName: "ScanViewController", bundle: nil)
+            vc.scanType = .certificate
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }   
+    }
 }
 
 extension EventsListViewController: UITableViewDelegate, UITableViewDataSource {

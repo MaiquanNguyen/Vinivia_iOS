@@ -9,7 +9,8 @@ import UIKit
 import Foundation
 import SwifterSwift
 import MBProgressHUD
-import jsonlogic
+import AVFoundation
+import AVKit
 
 struct Font {
     static func getFont(style: String, size: CGFloat) -> UIFont {
@@ -165,6 +166,24 @@ extension UIViewController {
             showAlert(title: "Error \(error.code)", message: error.localizedDescription)
         }
     }
+    
+    func displayScanFunctionPermission(_ complete: @escaping () -> Void) {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                //access granted
+                complete()
+            } else {
+                //access đéo granted
+                let ac = UIAlertController(title: "Camera not allowed", message: "Please allow us to use your Camera in Settings > Privacy > Camera", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Ok", style: .default) {
+                    action in
+                })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                    self?.present(ac, animated: true)
+                }
+            }
+        }
+    }
 }
 
 extension UITextField {
@@ -175,5 +194,22 @@ extension UITextField {
         view.contentMode = .center
         self.leftView = view
         self.leftViewMode = .always
+    }
+}
+
+extension UIBarButtonItem {
+    convenience init(image :UIImage?, title :String, target: Any?, action: Selector?) {
+        let button = UIButton(type: .custom)
+        if let image = image {
+            button.setImage(image, for: .normal)
+        }
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = Font.PoppinsSemiBold(16)
+        button.titleLabel?.textColor = UIColor.Text
+        if let target = target, let action = action {
+            button.addTarget(target, action: action, for: .touchUpInside)
+        }
+
+        self.init(customView: button)
     }
 }

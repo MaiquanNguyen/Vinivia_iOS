@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CovidCertificateSDK
 
 struct Event: Codable {
     var id: Int?
@@ -82,6 +83,20 @@ struct LoginResponse: Codable {
     let info: User?
     enum CodingKeys: String, CodingKey {
         case accessToken, info
+    }
+}
+
+class UserCovidCert {
+    let isValid: Bool
+    let covidCertificate: CovidCertificate
+    let validUntil: Date
+    let validFrom: Date
+    
+    init(valid: Bool, cert: CovidCertificate, until: Date, from: Date) {
+        self.isValid = valid
+        self.covidCertificate = cert
+        self.validUntil = until
+        self.validFrom = from
     }
 }
 

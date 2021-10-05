@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     
     @IBOutlet private weak var emailField: UITextField!
     @IBOutlet private weak var passField: UITextField!
@@ -31,6 +31,11 @@ class LoginViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     private func prepareViewModel() {
         viewModel.loginLoading.subscribe(onNext: {
             [weak self] loading in
@@ -46,7 +51,8 @@ class LoginViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     private func moveToEventList() {
-        
+        let vc = EventsListViewController(nibName: "EventsListViewController", bundle: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     private func moveToForgotPass() {
         
