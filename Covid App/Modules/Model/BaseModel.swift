@@ -88,15 +88,15 @@ struct LoginResponse: Codable {
 
 class UserCovidCert {
     let isValid: Bool
-    let covidCertificate: CovidCertificate
-    let validUntil: Date
+    let certificate: CovidCertificate
     let validFrom: Date
+    let validUntil: Date
     
-    init(valid: Bool, cert: CovidCertificate, until: Date, from: Date) {
+    init(valid: Bool, certificate: CovidCertificate, from: Date, unitl: Date) {
         self.isValid = valid
-        self.covidCertificate = cert
-        self.validUntil = until
+        self.certificate = certificate
         self.validFrom = from
+        self.validUntil = unitl
     }
 }
 

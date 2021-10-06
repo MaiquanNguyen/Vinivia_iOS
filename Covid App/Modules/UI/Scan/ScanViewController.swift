@@ -31,6 +31,13 @@ class ScanViewController: UIViewController {
         addScanning()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !captureSession.isRunning {
+            captureSession.startRunning()
+        }
+    }
+    
     // MARK: - Properties
     let disposeBag = DisposeBag()
     var viewModel = ScanViewModel()
@@ -42,16 +49,23 @@ class ScanViewController: UIViewController {
         }).disposed(by: disposeBag)
         viewModel.getCovidCertSuccess.subscribe(onNext: {
             [weak self] cert in
-            self?.showCertInfo(cert)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self?.showCertInfo(cert)
+            }
         }).disposed(by: disposeBag)
         viewModel.getCovidCertFailed.subscribe(onNext: {
             [weak self] error in
-            self?.showError(error)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self?.showError(error)
+            }
         }).disposed(by: disposeBag)
     }
     
     private func showCertInfo(_ cert: UserCovidCert) {
         print("show cert")
+        let vc = CertificateInfoViewController(nibName: "CertificateInfoViewController", bundle: nil)
+        vc.certInfo = cert
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

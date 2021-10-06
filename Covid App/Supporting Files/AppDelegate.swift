@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) {
             self.window?.overrideUserInterfaceStyle = .light
         }
-        CovidCertificateSDK.initialize(environment: .dev, apiKey: "b4b24598-1782-da40-7c8f-bce653458e21")
-//        CovidCertificateSDK.initialize(environment: .prod, apiKey: "ae4a8d6d-f15d-6080-91ae-013e9854f512")
+//        CovidCertificateSDK.initialize(environment: .dev, apiKey: "b4b24598-1782-da40-7c8f-bce653458e21")
+        CovidCertificateSDK.initialize(environment: .prod, apiKey: "ae4a8d6d-f15d-6080-91ae-013e9854f512")
         prepareScreen()
         return true
     }

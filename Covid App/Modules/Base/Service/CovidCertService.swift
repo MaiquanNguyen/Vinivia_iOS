@@ -7,8 +7,12 @@
 
 import Foundation
 import CovidCertificateSDK
+import RxSwift
 
 class CovidCertService {
+    
+    private var disposeBag = DisposeBag()
+    
     func checkCovidCert(_ code: String, completion: @escaping (Result<UserCovidCert, Error>) -> Void) {
         let result: Result<VerifierCertificateHolder, CovidCertError> = CovidCertificateSDK.Verifier.decode(encodedData: code)
         switch result {
@@ -21,37 +25,34 @@ class CovidCertService {
     
     private func checkCertHolder(_ holder: VerifierCertificateHolder, completion: @escaping (Result<UserCovidCert, Error>) -> Void) {
         CovidCertificateSDK.Verifier.check(holder: holder, forceUpdate: false) { result in
-            var valid: Bool?
-            var cert: CovidCertificate?
-            var validUnitl: Date?
-            var validFrom: Date?
-            defer {
-                if let valid = valid, let cert = cert, let validUnitl = validUnitl, let validFrom = validFrom {
-                    completion(.success(UserCovidCert(valid: valid, cert: cert, until: validUnitl, from: validFrom)))
+            let getResult: PublishSubject<VerificationResult?> = PublishSubject()
+            let getSignature: PublishSubject<ValidationResult?> = PublishSubject()
+            let getError: PublishSubject<Error> = PublishSubject()
+            getError.subscribe(onNext: {
+                error in
+                print("Error \(error) \(error.localizedDescription)")
+                completion(.failure(error))
+            }).disposed(by: self.disposeBag)
+            Observable.zip(getResult, getSignature, resultSelector: { verification, signature in
+                if let verification = verification, let signature = signature, let from = verification.validFrom, let to = verification.validUntil {
+                    let userCert = UserCovidCert(valid: signature.isValid, certificate: signature.payload, from: from, unitl: to)
+                    completion(.success(userCert))
                 } else {
-                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Can not parse data"])))
+                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Can not get covid certificate data"])))
                 }
+            }).observeOn(MainScheduler.instance).subscribe().disposed(by: self.disposeBag)
+
+            switch result.signature {
+            case .success(let rulesData):
+                getSignature.onNext(rulesData)
+            case .failure(_):
+                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "The COVID certificate does not have a valid signature"])))
             }
             switch result.nationalRules {
-            case .success(let rulesData):
-                if let until = rulesData.validUntil, let from = rulesData.validFrom {
-                    validUnitl = until
-                    validFrom = from
-                } else {
-                    validUnitl = Date()
-                    validFrom = Date()
-                }
+            case .success(let rules):
+                getResult.onNext(rules)
             case .failure(let error):
-                completion(.failure(error))
-                return
-            }
-            switch result.signature {
-            case .success(let data):
-                valid = data.isValid
-                cert = data.payload
-            case .failure(let error):
-                completion(.failure(error))
-                return
+                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "The COVID certificate does not have a valid national rules"])))
             }
         }
     }

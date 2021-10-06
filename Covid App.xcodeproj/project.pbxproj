@@ -41,6 +41,12 @@
 		CE50A1582709ED53001B3BDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE50A1562709ED53001B3BDF /* Main.storyboard */; };
 		CE50A15A2709ED54001B3BDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE50A1592709ED54001B3BDF /* Assets.xcassets */; };
 		CE50A15D2709ED54001B3BDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE50A15B2709ED54001B3BDF /* LaunchScreen.storyboard */; };
+		CE8785BA270D951700E6606E /* CertificateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8785B8270D951700E6606E /* CertificateInfoViewController.swift */; };
+		CE8785BB270D951700E6606E /* CertificateInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8785B9270D951700E6606E /* CertificateInfoViewModel.swift */; };
+		CE8785BD270D95A000E6606E /* CertificateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8785BC270D95A000E6606E /* CertificateInfoViewController.xib */; };
+		CE8785C0270D9BF800E6606E /* GuestInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8785BE270D9BF700E6606E /* GuestInfoViewController.swift */; };
+		CE8785C1270D9BF800E6606E /* GuestInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8785BF270D9BF700E6606E /* GuestInfoViewModel.swift */; };
+		CE8785C3270D9C0C00E6606E /* GuestInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8785C2270D9C0C00E6606E /* GuestInfoViewController.xib */; };
 		CE9023F1270BF34A00978243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9023EF270BF34A00978243 /* LoginViewController.swift */; };
 		CE9023F2270BF34A00978243 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9023F0270BF34A00978243 /* LoginViewModel.swift */; };
 		CE9023F4270BF36400978243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9023F3270BF36400978243 /* LoginViewController.xib */; };
@@ -92,6 +98,12 @@
 		CE50A1592709ED54001B3BDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE50A15C2709ED54001B3BDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE50A15E2709ED54001B3BDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE8785B8270D951700E6606E /* CertificateInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateInfoViewController.swift; sourceTree = "<group>"; };
+		CE8785B9270D951700E6606E /* CertificateInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateInfoViewModel.swift; sourceTree = "<group>"; };
+		CE8785BC270D95A000E6606E /* CertificateInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateInfoViewController.xib; sourceTree = "<group>"; };
+		CE8785BE270D9BF700E6606E /* GuestInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestInfoViewController.swift; sourceTree = "<group>"; };
+		CE8785BF270D9BF700E6606E /* GuestInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestInfoViewModel.swift; sourceTree = "<group>"; };
+		CE8785C2270D9C0C00E6606E /* GuestInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuestInfoViewController.xib; sourceTree = "<group>"; };
 		CE9023EF270BF34A00978243 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE9023F0270BF34A00978243 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CE9023F3270BF36400978243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -251,6 +263,9 @@
 		CEAB8F77270B4688009F4074 /* Guest Info */ = {
 			isa = PBXGroup;
 			children = (
+				CE8785BE270D9BF700E6606E /* GuestInfoViewController.swift */,
+				CE8785BF270D9BF700E6606E /* GuestInfoViewModel.swift */,
+				CE8785C2270D9C0C00E6606E /* GuestInfoViewController.xib */,
 			);
 			path = "Guest Info";
 			sourceTree = "<group>";
@@ -258,6 +273,9 @@
 		CEAB8F78270B4693009F4074 /* Certificate Info */ = {
 			isa = PBXGroup;
 			children = (
+				CE8785B8270D951700E6606E /* CertificateInfoViewController.swift */,
+				CE8785B9270D951700E6606E /* CertificateInfoViewModel.swift */,
+				CE8785BC270D95A000E6606E /* CertificateInfoViewController.xib */,
 			);
 			path = "Certificate Info";
 			sourceTree = "<group>";
@@ -413,6 +431,7 @@
 				CE43826C270C655600AC26AD /* Poppins-ThinItalic.ttf in Resources */,
 				CE438275270C655600AC26AD /* Poppins-Medium.ttf in Resources */,
 				CE438278270C655600AC26AD /* Poppins-ExtraLight.ttf in Resources */,
+				CE8785BD270D95A000E6606E /* CertificateInfoViewController.xib in Resources */,
 				CE50A15A2709ED54001B3BDF /* Assets.xcassets in Resources */,
 				CE438273270C655600AC26AD /* Poppins-BoldItalic.ttf in Resources */,
 				CE43826B270C655600AC26AD /* Poppins-ExtraBoldItalic.ttf in Resources */,
@@ -424,6 +443,7 @@
 				CE43826D270C655600AC26AD /* Poppins-Thin.ttf in Resources */,
 				CE438279270C655600AC26AD /* Poppins-SemiBold.ttf in Resources */,
 				CE43826A270C655600AC26AD /* Poppins-LightItalic.ttf in Resources */,
+				CE8785C3270D9C0C00E6606E /* GuestInfoViewController.xib in Resources */,
 				CE490212270C96B3005D478E /* ScanViewController.xib in Resources */,
 				CE50A1582709ED53001B3BDF /* Main.storyboard in Resources */,
 			);
@@ -479,6 +499,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE490210270C9699005D478E /* ScanViewModel.swift in Sources */,
+				CE8785C1270D9BF800E6606E /* GuestInfoViewModel.swift in Sources */,
+				CE8785C0270D9BF800E6606E /* GuestInfoViewController.swift in Sources */,
 				CE9023F1270BF34A00978243 /* LoginViewController.swift in Sources */,
 				CEC10B86270B562A004C0B04 /* BaseModel.swift in Sources */,
 				CEC10B83270B549E004C0B04 /* CovidAPI.swift in Sources */,
@@ -486,6 +508,7 @@
 				CE490214270C9CBA005D478E /* BaseViewController.swift in Sources */,
 				CEC10B8A270B5A54004C0B04 /* Constant.swift in Sources */,
 				CEC10B88270B59D7004C0B04 /* AppConfig.swift in Sources */,
+				CE8785BB270D951700E6606E /* CertificateInfoViewModel.swift in Sources */,
 				CE43824E270C34BC00AC26AD /* NetworkService.swift in Sources */,
 				CE49020F270C9699005D478E /* ScanViewController.swift in Sources */,
 				CE9023F7270BF39700978243 /* EventsListViewController.swift in Sources */,
@@ -494,6 +517,7 @@
 				CE902421270BF7E900978243 /* Extension.swift in Sources */,
 				CE9023F8270BF39700978243 /* EventsListViewModel.swift in Sources */,
 				CE9023F2270BF34A00978243 /* LoginViewModel.swift in Sources */,
+				CE8785BA270D951700E6606E /* CertificateInfoViewController.swift in Sources */,
 				CE438254270C431F00AC26AD /* EventListCell.swift in Sources */,
 				CE4354E3270B108F00D8C33F /* Base.swift in Sources */,
 				CE490216270CA07D005D478E /* CovidCertService.swift in Sources */,
